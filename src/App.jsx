@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
@@ -22,6 +22,9 @@ function App() {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
   }, [theme, lang]);
@@ -66,7 +69,7 @@ function App() {
         <main className="app-container">
           <AnimatePresence mode="wait">
             {role === 'none' ? (
-              <LandingPage key="landing" onSelectRole={handleSelectRole} />
+              <LandingPage key="landing" onSelectRole={handleSelectRole} lang={lang} />
             ) : showLogin ? (
               <ManagerLogin key="login" onBack={() => { setShowLogin(false); setRole('none'); }} />
             ) : role === 'employee' ? (

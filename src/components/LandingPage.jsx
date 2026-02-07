@@ -3,7 +3,9 @@ import { motion } from 'framer-motion';
 import { User, Car } from 'lucide-react';
 import './LandingPage.css';
 
-const LandingPage = ({ onSelectRole }) => {
+const LandingPage = ({ onSelectRole, lang }) => {
+    const isAr = lang === 'ar';
+
     return (
         <div className="landing-wrapper">
             <div className="split-container">
@@ -20,8 +22,8 @@ const LandingPage = ({ onSelectRole }) => {
                             transition={{ delay: 0.2 }}
                         >
                             <User size={64} className="icon" />
-                            <h2>Client</h2>
-                            <p>Book a ride or delivery</p>
+                            <h2>{isAr ? 'عميل' : 'Client'}</h2>
+                            <p>{isAr ? 'اطلب رحلة أو توصيل' : 'Book a ride or delivery'}</p>
                         </motion.div>
                     </div>
                 </motion.div>
@@ -39,8 +41,8 @@ const LandingPage = ({ onSelectRole }) => {
                             transition={{ delay: 0.3 }}
                         >
                             <Car size={64} className="icon" />
-                            <h2>Driver</h2>
-                            <p>Start earning with us</p>
+                            <h2>{isAr ? 'سائق' : 'Driver'}</h2>
+                            <p>{isAr ? 'ابدأ بالربح معنا' : 'Start earning with us'}</p>
                         </motion.div>
                     </div>
                 </motion.div>
