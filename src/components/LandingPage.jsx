@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { User, Car } from 'lucide-react';
 import './LandingPage.css';
+import landingEye from '../assets/landing_eye.png';
 
 const LandingPage = ({ onSelectRole, lang }) => {
     const isAr = lang === 'ar';
@@ -64,7 +65,7 @@ const LandingPage = ({ onSelectRole, lang }) => {
                         whileTap={{ scale: 0.95 }}
                     >
                         <div className="logo-content">
-                            <img src="/assets/landing_eye.png" alt="EM-AI Eye" className="logo-eye" />
+                            <img src={landingEye} alt="EM-AI Eye" className="logo-eye" />
                             <h1 className="logo-text">EM-AI</h1>
                             <div className="logo-line"></div>
                         </div>
