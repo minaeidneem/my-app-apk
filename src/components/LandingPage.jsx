@@ -54,6 +54,8 @@ const LandingPage = ({ onSelectRole, lang }) => {
                         initial={{ scale: 0, rotate: -45 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ type: 'spring', damping: 12 }}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                     >
                         <img src="/assets/logo.png" alt="Logo" />
                     </motion.div>

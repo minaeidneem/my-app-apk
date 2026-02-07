@@ -8,10 +8,10 @@
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
   --text-dim: #475569;
-  --accent-primary: #6366f1;
-  --accent-secondary: #00a859;
+  --accent-primary: #27ae60;
+  --accent-secondary: #2ecc71;
   /* Logo Green */
-  --accent-glow: rgba(0, 168, 89, 0.4);
+  --accent-glow: rgba(46, 204, 113, 0.4);
   --glass-border: rgba(255, 255, 255, 0.08);
   --shadow-color: rgba(0, 0, 0, 0.5);
 
