@@ -7,13 +7,16 @@ import EmployeePortal from './components/EmployeePortal';
 import BottomNav from './components/BottomNav';
 import ManagerLogin from './components/ManagerLogin';
 
+import LandingPage from './components/LandingPage';
+import './components/LandingPage.css';
+
 export const AppContext = createContext();
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
-  const [role, setRole] = useState(localStorage.getItem('role') || 'employee');
+  const [role, setRole] = useState(localStorage.getItem('role') || 'none'); // Default to none
   const [showLogin, setShowLogin] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -35,10 +38,16 @@ function App() {
   const toggleLang = () => setLang(prev => prev === 'en' ? 'ar' : 'en');
 
   const logout = () => {
-    const msg = lang === 'en' ? 'Logout successful. Switch to Manager Mode?' : 'تم تسجيل الخروج بنجاح. الانتقال لوضع المدير؟';
-    if (window.confirm(msg)) {
+    setRole('none');
+    setShowLogin(false);
+  };
+
+  const handleSelectRole = (selectedRole) => {
+    setRole(selectedRole);
+    if (selectedRole === 'manager') {
       setShowLogin(true);
-      setRole('none');
+    } else {
+      setShowLogin(false);
     }
   };
 
@@ -52,12 +61,14 @@ function App() {
           <div className="glow-orb orb-2"></div>
         </div>
 
-        <Header />
+        {role !== 'none' && <Header />}
 
         <main className="app-container">
           <AnimatePresence mode="wait">
-            {showLogin ? (
-              <ManagerLogin key="login" onBack={() => { setShowLogin(false); setRole('employee'); }} />
+            {role === 'none' ? (
+              <LandingPage key="landing" onSelectRole={handleSelectRole} />
+            ) : showLogin ? (
+              <ManagerLogin key="login" onBack={() => { setShowLogin(false); setRole('none'); }} />
             ) : role === 'employee' ? (
               <motion.div
                 key="employee-portal"
