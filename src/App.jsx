@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
-import Dashboard from './components/Dashboard';
-import Directory from './components/Directory';
+import HomePage from './components/HomePage';
+import AnalyticsPage from './components/AnalyticsPage';
+import AttendancePage from './components/AttendancePage';
+import SettingsPage from './components/SettingsPage';
 import EmployeePortal from './components/EmployeePortal';
 import BottomNav from './components/BottomNav';
 import ManagerLogin from './components/ManagerLogin';
@@ -13,7 +15,7 @@ import './components/LandingPage.css';
 import { AppContext } from './context/AppContext';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('home');
   // State Machine: 'init' | 'ready' | 'error'
   const [appStatus, setAppStatus] = useState('init');
 
@@ -128,7 +130,10 @@ function App() {
                 exit={{ opacity: 0, scale: 1.05 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                {activeTab === 'dashboard' ? <Dashboard /> : <Directory />}
+                {activeTab === 'home' && <HomePage onNavigate={setActiveTab} />}
+                {activeTab === 'analytics' && <AnalyticsPage />}
+                {activeTab === 'attendance' && <AttendancePage />}
+                {activeTab === 'settings' && <SettingsPage />}
               </motion.div>
             )}
           </AnimatePresence>

@@ -7,17 +7,17 @@ const BottomNav = ({ activeTab, setActiveTab }) => {
     const { lang } = useContext(AppContext);
 
     const translations = {
-        en: { CORE: "CORE", LENS: "LENS", SYNC: "SYNC", DATA: "DATA" },
-        ar: { CORE: "الرئيسية", LENS: "العدسة", SYNC: "مزامنة", DATA: "البيانات" }
+        en: { HOME: "HOME", ANALYTICS: "ANALYTICS", ATTENDANCE: "ATTENDANCE", SETTINGS: "SETTINGS" },
+        ar: { HOME: "الرئيسية", ANALYTICS: "التحليلات", ATTENDANCE: "الحضور", SETTINGS: "الإعدادات" }
     };
 
     const t = translations[lang];
 
     const tabs = [
-        { id: 'dashboard', icon: LayoutDashboard, label: t.CORE },
-        { id: 'directory', icon: Users, label: t.LENS },
-        { id: 'activity', icon: Activity, label: t.SYNC },
-        { id: 'settings', icon: Settings, label: t.DATA },
+        { id: 'home', icon: LayoutDashboard, label: t.HOME },
+        { id: 'analytics', icon: Activity, label: t.ANALYTICS },
+        { id: 'attendance', icon: Users, label: t.ATTENDANCE },
+        { id: 'settings', icon: Settings, label: t.SETTINGS },
     ];
 
     const handleTabClick = (tabId) => {
