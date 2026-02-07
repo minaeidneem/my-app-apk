@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Moon, Sun, Languages, Bell, User } from 'lucide-react';
-import { AppContext } from '../App';
+import { AppContext } from '../context/AppContext';
 import logo from '../assets/logo.png';
 
 const Header = () => {

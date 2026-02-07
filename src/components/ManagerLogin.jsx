@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { LogIn, ShieldCheck, User, ArrowRight } from 'lucide-react';
-import { AppContext } from '../App';
+import { AppContext } from '../context/AppContext';
 
 const ManagerLogin = ({ onBack }) => {
     const { setRole, lang } = useContext(AppContext);

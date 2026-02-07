@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ChevronRight, Mail, MapPin, X, Fingerprint } from 'lucide-react';
 import { INITIAL_EMPLOYEES } from '../data/employees';
-import { AppContext } from '../App';
+import { AppContext } from '../context/AppContext';
 
 const Directory = () => {
     const { lang } = useContext(AppContext);

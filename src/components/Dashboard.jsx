@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Zap, Shield, Cpu, Flame } from 'lucide-react';
-import { AppContext } from '../App';
+import { AppContext } from '../context/AppContext';
 
 const Dashboard = () => {
     const { lang } = useContext(AppContext);
     const [pulse, setPulse] = useState(88);
+    // Lazy initialization for random data ensures it's created once and pure
+    const [heatmapData] = useState(() => Array.from({ length: 24 }).map(() => Math.random()));
 
     const translations = {
         en: {
@@ -42,10 +44,6 @@ const Dashboard = () => {
         }, 2000);
         return () => clearInterval(interval);
     }, []);
-
-    const heatmapData = useMemo(() =>
-        Array.from({ length: 24 }).map(() => Math.random()),
-        []);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { LayoutDashboard, Users, Activity, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { AppContext } from '../App';
+import { AppContext } from '../context/AppContext';
 
 const BottomNav = ({ activeTab, setActiveTab }) => {
-    const { lang, role } = useContext(AppContext);
+    const { lang } = useContext(AppContext);
 
     const translations = {
         en: { CORE: "CORE", LENS: "LENS", SYNC: "SYNC", DATA: "DATA" },

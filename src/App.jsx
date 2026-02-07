@@ -1,5 +1,5 @@
-import React, { useState, useEffect, createContext } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import Directory from './components/Directory';
@@ -9,25 +9,27 @@ import ManagerLogin from './components/ManagerLogin';
 
 import LandingPage from './components/LandingPage';
 import './components/LandingPage.css';
-
-export const AppContext = createContext();
+import { AppContext } from './context/AppContext';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
-  const [role, setRole] = useState(localStorage.getItem('role') || 'none'); // Default to none
+  const [role, setRole] = useState(localStorage.getItem('role') || 'none');
   const [showLogin, setShowLogin] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-  }, [theme, lang]);
+    if (mounted) {
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    }
+  }, [theme, lang, mounted]);
 
   useEffect(() => {
     if (mounted) {

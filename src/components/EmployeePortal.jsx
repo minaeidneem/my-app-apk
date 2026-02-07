@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { LogOut, ClipboardList, Clock, Star, MessageSquare } from 'lucide-react';
-import { AppContext } from '../App';
+import { AppContext } from '../context/AppContext';
 
 const EmployeePortal = () => {
     const { lang, logout } = useContext(AppContext);
