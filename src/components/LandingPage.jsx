@@ -12,6 +12,9 @@ const LandingPage = ({ onSelectRole, lang }) => {
                 {/* Client Side (White) */}
                 <motion.div
                     className="split-side client-side"
+                    initial={{ x: '-100%' }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'spring', damping: 20, stiffness: 100 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => onSelectRole('employee')}
                 >
@@ -19,7 +22,7 @@ const LandingPage = ({ onSelectRole, lang }) => {
                         <motion.div
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.2 }}
+                            transition={{ delay: 0.4 }}
                         >
                             <User size={64} className="icon" />
                             <h2>{isAr ? 'عميل' : 'Client'}</h2>
@@ -31,6 +34,9 @@ const LandingPage = ({ onSelectRole, lang }) => {
                 {/* Driver Side (Dark) */}
                 <motion.div
                     className="split-side driver-side"
+                    initial={{ x: '100%' }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'spring', damping: 20, stiffness: 100 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => onSelectRole('manager')}
                 >
@@ -38,7 +44,7 @@ const LandingPage = ({ onSelectRole, lang }) => {
                         <motion.div
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.3 }}
+                            transition={{ delay: 0.5 }}
                         >
                             <Car size={64} className="icon" />
                             <h2>{isAr ? 'سائق' : 'Driver'}</h2>
@@ -47,17 +53,21 @@ const LandingPage = ({ onSelectRole, lang }) => {
                     </div>
                 </motion.div>
 
-                {/* Floating Logo Badge */}
+                {/* Floating Logo Badge - Composite Design */}
                 <div className="logo-badge-container">
                     <motion.div
                         className="logo-badge"
-                        initial={{ scale: 0, rotate: -45 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ type: 'spring', damping: 12 }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.2, type: 'spring', damping: 12, stiffness: 120 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
-                        <img src="/assets/logo.png" alt="Logo" />
+                        <div className="logo-content">
+                            <img src="/assets/landing_eye.png" alt="EM-AI Eye" className="logo-eye" />
+                            <h1 className="logo-text">EM-AI</h1>
+                            <div className="logo-line"></div>
+                        </div>
                     </motion.div>
                 </div>
             </div>
