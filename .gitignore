@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Security - KeyStores
+*.jks
+*.keystore
+generate-keystore.ps1 # Optional: ignore the script itself if desired, but good to keep for ref
