@@ -6,6 +6,7 @@ import Directory from './components/Directory';
 import EmployeePortal from './components/EmployeePortal';
 import BottomNav from './components/BottomNav';
 import ManagerLogin from './components/ManagerLogin';
+import SplashScreen from './components/SplashScreen'; // Import Splash
 
 import LandingPage from './components/LandingPage';
 import './components/LandingPage.css';
@@ -13,31 +14,56 @@ import { AppContext } from './context/AppContext';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  // State Machine: 'init' | 'ready' | 'error'
+  const [appStatus, setAppStatus] = useState('init');
+
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
   const [role, setRole] = useState(localStorage.getItem('role') || 'none');
   const [showLogin, setShowLogin] = useState(false);
-  const [mounted, setMounted] = useState(false);
+
+  // Initialize App
+  useEffect(() => {
+    const initApp = async () => {
+      try {
+        // Enforce a minimum splash time for better UX (prevent flicker)
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Hydrate state from localStorage (already done in initial state, but can be expanded)
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+        setAppStatus('ready');
+      } catch (error) {
+        console.error("App initialization failed:", error);
+        setAppStatus('error');
+      }
+    };
+
+    initApp();
+
+    // Fallback safety timeout (5s)
+    const safetyTimeout = setTimeout(() => {
+      setAppStatus(prev => prev === 'init' ? 'ready' : prev);
+    }, 5000);
+
+    return () => clearTimeout(safetyTimeout);
+  }, [theme, lang]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (mounted) {
+    if (appStatus === 'ready') {
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
     }
-  }, [theme, lang, mounted]);
+  }, [theme, lang, appStatus]);
 
   useEffect(() => {
-    if (mounted) {
+    if (appStatus === 'ready') {
       localStorage.setItem('theme', theme);
       localStorage.setItem('lang', lang);
       localStorage.setItem('role', role);
     }
-  }, [theme, lang, role, mounted]);
+  }, [theme, lang, role, appStatus]);
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   const toggleLang = () => setLang(prev => prev === 'en' ? 'ar' : 'en');
@@ -56,7 +82,17 @@ function App() {
     }
   };
 
-  if (!mounted) return null;
+  if (appStatus === 'init') {
+    return <SplashScreen />;
+  }
+
+  if (appStatus === 'error') {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'black', color: 'white' }}>
+        <h2>Something went wrong. Please restart.</h2>
+      </div>
+    );
+  }
 
   return (
     <AppContext.Provider value={{ theme, lang, role, setRole, toggleTheme, toggleLang, logout }}>
