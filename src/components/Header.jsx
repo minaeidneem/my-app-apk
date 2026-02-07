@@ -16,9 +16,8 @@ const Header = () => {
                         style={{
                             height: '100%',
                             objectFit: 'contain',
-                            filter: theme === 'dark' ? 'invert(1) hue-rotate(180deg) brightness(1.5)' : 'none',
-                            // The logo has a white bg, bit of filtering to make it look native on dark
-                            mixBlendMode: theme === 'dark' ? 'screen' : 'multiply'
+                            // Subtle white glow/border on dark mode to keep the logo clear without inverting the green eye
+                            filter: theme === 'dark' ? 'drop-shadow(0 0 5px rgba(255,255,255,0.2))' : 'none',
                         }}
                     />
                 </div>
